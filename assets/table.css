@@ -1,0 +1,12 @@
+.table_css
+th {
+    border: 1px solid;
+    font-family: sans-serif,Arial, Helvetica;
+    background-color:lightgrey;
+    border-radius: 2px;
+}
+td {
+    border: 1px solid;
+    font-family: sans-serif, Arial, Helvetica;
+    border-radius: 2px;
+}
