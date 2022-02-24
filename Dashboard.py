@@ -138,8 +138,8 @@ def update_graph(value,start_date,end_date):
         newvalue.append(metrics(i))
 
     joined_values = ",".join(newvalue)
-    baseurl = BASE_URL + "/metrics/deliverability/time-series?from=" + start_date + "T00:00&to=" + end_date + "T00:00&delimiter=,&precision=day&metrics=" + joined_values
-    response_API = requests.get(baseurl, headers = {"Authorization" : API_KEY})
+    api_url = BASE_URL + "/metrics/deliverability/time-series?from=" + start_date + "T00:00&to=" + end_date + "T00:00&delimiter=,&precision=day&metrics=" + joined_values
+    response_API = requests.get(api_url, headers = {"Authorization" : API_KEY})
     response_info = json.loads(response_API.text)
 
     new_df = pd.json_normalize(response_info, record_path=['results'])
