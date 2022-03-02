@@ -13,9 +13,9 @@ Clone this repo, then modify the App.py with your API key
 NOTE: This MUST be run on python 3.10 or above
 
 You must install the following libraries:
- -requests
- -dash
- -pandas
+ - requests
+ - dash
+ - pandas
 
 Then point your browser to http://localhost:8050
 
