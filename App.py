@@ -110,7 +110,7 @@ def render_content(tab):
     elif tab == 'tab-2':
 
         #Build out and call the events API
-        api_url = BASE_URL + "/events/message?delimiter=,&events=delivery,injection,bounce,delay,policy_rejection,out_of_band,open,click,generation_failure,generation_rejection,spam_complaint,list_unsubscribe,link_unsubscribe&page=1&per_page=10&reasons=bounce,internal"
+        api_url = BASE_URL + "/events/message?delimiter=,&events=delivery,injection,bounce,delay,policy_rejection,out_of_band,open,click,generation_failure,generation_rejection,spam_complaint,list_unsubscribe,link_unsubscribe&page=1&per_page=10"
         response_API = requests.get(api_url, headers = {"Authorization" : API_KEY})
         response_info = json.loads(response_API.text)
 
