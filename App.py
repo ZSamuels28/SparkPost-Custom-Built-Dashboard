@@ -50,10 +50,18 @@ def update_graph(value,start_date,end_date):
     for i in value:
         newvalue.append(metrics(i))
 
-    #Build the API call utilizing the metrics and date provided
     joined_values = ",".join(newvalue)
-    api_url = BASE_URL + "/metrics/deliverability/time-series?from=" + start_date + "T00:00&to=" + end_date + "T00:00&delimiter=,&precision=day&metrics=" + joined_values
-    response_API = requests.get(api_url, headers = {"Authorization" : API_KEY})
+
+    #Build the API call utilizing the parameters provided
+    params = {
+        "from" : start_date + "T00:00",
+        "to" : end_date + "T00:00",
+        "delimiter" : ",",
+        "precision" : "day",
+        "metrics" : joined_values
+    }
+    api_url = BASE_URL + "/metrics/deliverability/time-series"
+    response_API = requests.get(api_url, headers = {"Authorization" : API_KEY}, params=params)
     response_info = json.loads(response_API.text)
 
     new_df = pd.json_normalize(response_info, record_path=['results'])
@@ -110,8 +118,14 @@ def render_content(tab):
     elif tab == 'tab-2':
 
         #Build out and call the events API
-        api_url = BASE_URL + "/events/message?delimiter=,&events=delivery,injection,bounce,delay,policy_rejection,out_of_band,open,click,generation_failure,generation_rejection,spam_complaint,list_unsubscribe,link_unsubscribe&page=1&per_page=10"
-        response_API = requests.get(api_url, headers = {"Authorization" : API_KEY})
+        params = {
+            "events" : "delivery,injection,bounce,delay,policy_rejection,out_of_band,open,click,generation_failure,generation_rejection,spam_complaint,list_unsubscribe,link_unsubscribe",
+            "delimiter" : ",",
+            "page" : "1",
+            "per_page" : "10"
+        }
+        api_url = BASE_URL + "/events/message"
+        response_API = requests.get(api_url, headers = {"Authorization" : API_KEY}, params=params)
         response_info = json.loads(response_API.text)
 
         new_df = pd.json_normalize(response_info, record_path=['results'])
